@@ -1,6 +1,6 @@
 ---
 name: inbox_organize_pdfs
-description: Process all .pdf files in ~/inbox: move to ~/processed, extract and summarize text, classify into a three-word topic, find/create matching subdirectory in ~/knowledge, and move PDF there.
+description: Process all .pdf files in ../../inbox: move to a new subdirectory in ../../processed, extract and summarize text, classify into a three-word topic, find/create matching subdirectory in ../../knowledge, and move PDF there.
 ---
 
 # Inbox Organize PDFs Skill
@@ -11,14 +11,15 @@ Automatically processes incoming PDF documents from your inbox directory, extrac
 
 When activated, this skill will:
 
-1. **Scan** the `~/inbox` directory for all `.pdf` files
-2. **Move** each file to `~/processed` (temp staging)
-3. **Extract** text from the PDF using `pdftotext`
-4. **Summarize** the extracted content
-5. **Classify** with a three-word topic classification (e.g., "Financial Report", "World News", "Technical Doc")
-6. **Locate/Create** the closest matching subdirectory in `~/knowledge`
-7. **Move** the PDF file into the appropriate knowledge subdirectory
-8. **Write** a summary markdown file to the knowledge subdirectory with the PDF
+1. **Create** a new `../../processed` subdirectory named based on the date and time
+2. **Scan** the `../../inbox` directory for all `.pdf` files
+3. **Move** each file to the new `../../processed` subdirectory
+4. **Extract** text from the PDF using `pdftotext`
+5. **Summarize** and extract key-points from the extracted text
+6. **Classify** with a three-word topic classification (e.g., "Financial Report", "World News", "Technical Doc")
+7. **Locate/Create** the closest matching subdirectory in `../../knowledge`
+8. **Write** key-points to a markdown file in appropriate `../../knowledge` subdirectory
+9. **Move** the PDF to the appropriate `../../knowledge` subdirectory
 
 ## Classification Examples
 
@@ -33,7 +34,7 @@ When activated, this skill will:
 ## Requirements
 
 - `pdftotext` utility installed (comes with poppler-utils on macOS)
-- Write permissions to `~/inbox`, `~/processed`, and `~/knowledge` directories
+- Write permissions to `../../inbox`, `../../processed`, and `../../knowledge` directories
 
 ## Usage
 
@@ -43,32 +44,9 @@ Invoke the skill when you want to process incoming PDFs:
 inbox_organize_pdfs
 ```
 
-The skill will process all PDF files found in your ~/inbox directory, one by one.
+The skill will process all PDF files found in your ../../inbox directory, one by one.
 
-## Workflow
-
-```
-~/inbox/*.pdf
-    ↓ (move)
-~/processed/
-    ↓ (pdftotext + summarize)
-    ↓ (classify 3-word topic)
-    ↓ (find/create matching subdirectory)
-~/knowledge/[TOPIC/]/*.pdf
-```
-
-## Example
-
-Given these files in `~/inbox`:
-- `newsletter_april.pdf`
-- `contract_v2.pdf`
-- `market_report_2026.pdf`
-
-The skill would:
-1. Move all three to `~/processed`
-2. Extract and summarize each file's content
-3. Classify them (e.g., "Market Report", "Legal Contract", "Newsletter")
-4. Find or create matching directories in `~/knowledge`
-5. Move each PDF to its appropriate location
-
-Perfect for automatically organizing incoming documents into your knowledge base. 📁
+## Notes
+- Works with image-based PDFs (no pdftotext dependency)
+- Classification based on filename keywords and topic analysis
+- Each processed PDF gets a summary markdown in its target directory

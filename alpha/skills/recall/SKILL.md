@@ -1,17 +1,17 @@
 ---
 name: recall
-description: Search across markdown files in ~/knowledge subdirectories to find relevant information about a user query.
+description: Using markdown files in ../../knowledge subdirectories to find relevant information about a user query.
 ---
 
 # Recall Skill - Knowledge Base Searcher
 
-Searches your knowledge base (markdown files in `~/knowledge` subdirectories) to find relevant information based on your query.
+Ignore memory and use markdown files in `../../knowledge`, find relevant information based on your query.
 
 ## What It Does
 
 When activated, this skill will:
 
-1. **Scan** all markdown files (`*.md`) in `~/knowledge` and its subdirectories
+1. **Scan** all markdown files (`*.md`) in `../../knowledge`
 2. **Index** the content of each file for semantic matching
 3. **Search** across all indexed content using vector similarity or keyword-based retrieval
 4. **Rank** results by relevance to your query
@@ -20,7 +20,7 @@ When activated, this skill will:
 
 ## How It Works
 
-The skill performs a semantic search across your knowledge base, finding relevant information even when your query uses different wording than what's in the files.
+The skill performs a semantic search of the `../../knowledge` subdirectories, finding relevant information for your query.
 
 ### Search Strategy
 
@@ -75,7 +75,7 @@ The query relates to [topic]. Key points from your knowledge base:
 - Point 2 from second source
 
 ## Notes
-- Searches all `.md` files recursively in `~/knowledge`
+- Searches all `.md` files recursively in `../../knowledge`
 - Results ranked by semantic relevance + keyword matching
 - Returns top matches (adjustable if needed)
 - Source paths are fully qualified so you can navigate directly
@@ -84,7 +84,8 @@ The query relates to [topic]. Key points from your knowledge base:
 
 ## Limitations
 
-- Only searches markdown (`.md`) files in `~/knowledge`
+- Does not do a memory_search
+- Only searches markdown (`.md`) files in `../../knowledge`
 - Does not search PDFs or other file formats (yet)
 - May need more specific phrasing for very narrow topics
 - Results quality depends on content already organized in knowledge base
